@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Inputs</title>
+</head>
+<body>
+    <div id="input_area">
+
+    </div>
+    <button id="add_button" onclick="addInput()">Add</button>
+
+    <script>
+        function addInput(){
+            const input_area = document.getElementById('input_area');
+            const input_index = input_area.getElementsByTagName('div').length + 1;
+            const input_tag = document.createElement('input');
+            input_tag.type = "text";
+            input_tag.class = "";
+            input_tag.id = `input_${input_index}`
+            const input_label = document.createElement('label');
+            input_label.for = input_tag.id;
+            input_label.textContent = `入力${input_index}`;
+
+            const input_div = document.createElement('div');
+            input_div.append(input_label);
+            input_div.append(input_tag);
+            input_area.append(input_div);
+        }
+    </script>
+</body>
+</html>
