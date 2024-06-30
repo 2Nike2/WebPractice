@@ -13,6 +13,65 @@
 
     <script>
         function addInput(){
+
+            const select1 = document.createElement('select');
+            const option_empty1 = document.createElement('option');
+            option1_data = [
+                {value: -1, text: ''},
+                {value: 0, text: '肉'},
+                {value: 1, text: '魚'},
+                {value: 2, text: '豆'}
+            ];
+            option1_data.forEach(temp_data => {
+                const temp_option = document.createElement('option');
+                temp_option.value = temp_data.value;
+                temp_option.textContent = temp_data.text;
+                select1.append(temp_option);
+            });
+
+            const select2 = document.createElement('select');
+
+            select1.addEventListener('change', function(e){
+                const select1_value = e.target.value;
+                let option2_data = [
+                    {value: -1, text: ''}
+                ];
+                switch(select1_value){
+                    case "0": 
+                        option2_data = option2_data.concat([
+                            {value: 0, text: '牛'},
+                            {value: 1, text: '豚'},
+                            {value: 2, text: '鶏'},
+                            {value: 3, text: '羊'}
+                        ]);
+                        break;
+                    case "1": 
+                        option2_data = option2_data.concat([
+                            {value: 0, text: 'マグロ'},
+                            {value: 1, text: '鯖'},
+                            {value: 2, text: 'しゃけ'},
+                            {value: 3, text: '鯛'},
+                            {value: 4, text: 'カツオ'}
+                        ]);
+                        break;
+                    case "2": 
+                        option2_data = option2_data.concat([
+                            {value: 0, text: '大豆'},
+                            {value: 1, text: '枝豆'},
+                            {value: 2, text: 'そら豆'}
+                        ]);
+                        break;
+                }
+                select2.innerHTML = ''
+                console.log(option2_data);
+                option2_data.forEach( temp_data => {
+                    const temp_option = document.createElement('option');
+                    temp_option.value = temp_data.value;
+                    temp_option.textContent = temp_data.text;
+                    select2.append(temp_option);
+                });
+            });
+
             const input_area = document.getElementById('input_area');
             const input_index = input_area.getElementsByTagName('div').length + 1;
             const input_tag = document.createElement('input');
@@ -24,6 +83,8 @@
             input_label.textContent = `入力${input_index}`;
 
             const input_div = document.createElement('div');
+            input_div.append(select1);
+            input_div.append(select2);
             input_div.append(input_label);
             input_div.append(input_tag);
             input_area.append(input_div);
