@@ -16,20 +16,51 @@
     <script>
         $(document).ready(function(){
             $('.select2_test').select2();
+            $('.select2_test_2').select2();
+            $('.select2_test_2').select2({
+                closeOnSelect: false
+            });
         })
 
     </script>
 </head>
 <body>
     <div>
-        <select class="select2_test" style="width: 200px;">
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
-            <option value="4">Option 4</option>
-            <option value="5">Option 5</option>
+
+        <div>
+            <select class="select2_test" style="width: 200px;">
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+                <option value="4">Option 4</option>
+                <option value="5">Option 5</option>
+                </select>
+        </div>
+
+        <div>
+            <select class="select2_test_2" multiple style="width: 200px;">
+                <option value="大根">大根</option>
+                <option value="人参">人参</option>
+                <option value="じゃがいも">じゃがいも</option>
+                <option value="玉ねぎ">玉ねぎ</option>
+                <option value="キャベツ">キャベツ</option>
+                <option value="牛肉">牛肉</option>
+                <option value="豚肉">豚肉</option>
+                <option value="鶏肉">鶏肉</option>
+                <option value="マグロ">マグロ</option>
+                <option value="サーモン">サーモン</option>
+                <option value="鯖">さば</option>
+                <option value="鰹">カツオ</option>
+                <option value="鮭">サケ</option>
+                <option value="鯛">タイ</option>
+                <option value="鰤">ブリ</option>
+                <option value="鯵">アジ</option>
+            </select>
+    
+        </div>
+    
     </div>
 
-
+ 
 </body>
 </html>
