@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample</title>
+    <link href="jquery/jquery-ui.css" rel="stylesheet" />
+    <script src="jquery/external/jquery/jquery.js"></script>
+    <script src="jquery/jquery-ui.js"></script>
+</head>
+<body>
+    <div id="dlgMessage" style="display: none;">
+        <p id="message">こんにちは!</p>
+    </div>
+
+    <script>
+        $(function(){
+            $("#button").button().click(
+                function(){
+                    $("#dlgMessage").dialog("open");
+                // alert("こんにちは!");
+                }
+            );
+
+            $("#dlgMessage").dialog({
+                modal: true,
+                title: "メッセージダイアログ",
+                buttons:{
+                    "OK": function(){
+                        $("#dlgMessage").dialog("close");
+                    }
+                },
+                autoOpen: false
+            });
+
+            $("#dtpDate").datepicker({
+                dateFormat: 'yy年mm月dd日',
+                monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+            });
+        });
+        
+    </script>
+    <h1 class="gray">サンプルページ</h1>
+    <input type="text" id="dtpDate" value="" />
+    <br><br>
+    <button id="button">ボタン</button>
+
+</body>
+</html>
