@@ -33,5 +33,83 @@
             color: red;
         }
     </style>
+
+    <div id="div2">
+        div2
+        <div id="div2_1">
+            div2_1
+            <p id="p2_1_1">test</p>
+        </div>
+    </div>
+
+    <style>
+        #div2 {
+            background-color: lightcoral;
+            text-align: center;
+            padding: 30px;
+        }
+        #div2_1 {
+            background-color: lightgreen;
+            text-align: right;
+            margin: 50px;
+        }
+        #p2_1_1 {
+            background-color: lightblue;
+            text-align: left;
+            padding: 50px;
+            margin: 30px;
+        }
+    </style>
+
+    <div id="div3">
+        <div id="div3_1">
+            <p>3_1_1</p>
+        </div>
+        <div id="div3_2">
+            <p>3_2_1</p>
+        </div>
+    </div>
+
+    <style>
+        #div3 {
+            display: flex;
+            /* justify-content: space-around; */
+            /* align-items: center; */
+            align-items: right;
+            height: 300px;
+            background-color: lightgray;
+        }
+        #div3_1 {
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+            margin-right: 200px;
+        }
+        #div3_2 {
+            width: 100px;
+            height: 100px;
+            background-color: lightcoral;
+        }
+    </style>
+
+    <div id="div4">
+        <div id="div4_1">
+            <button id="button4_1_1">in div4_1 button</button>
+        </div>
+        <div id="div4_2">
+            in div4_2
+        </div>
+    </div>
+
+    <style>
+        #div4 {
+            display: flex;
+            background-color: palegreen;
+        }
+        #div4_1 {
+            background-color: darkcyan;
+        }
+    </style>
+
 </body>
 </html>
