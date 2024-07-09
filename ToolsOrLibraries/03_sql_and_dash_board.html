@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alasql/4.4.0/alasql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js" integrity="sha512-k37wQcV4v2h6jgYf5IUz1MoSKPpDs630XGSmCaCCOXxy2awgAWKHGZWr9nMyGgk3IOxA1NxdkN8r1JHgkUtMoQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    
+    <div style="display: flex;">
+        <div id="chart1" style="width: 800px; height: 400px;"></div>
+        <div id="chart2" style="width: 800px; height: 400px;"></div>
+    </div>
+    <div style="display: flex;">
+        <div id="chart3" style="width: 800px; height: 400px;"></div>
+        <div id="chart4" style="width: 800px; height: 400px;"></div>
+    </div>
+
+    <script>
+        const data = [
+            {id:  1, company: 'CompanyA', genre1: 'genre1_A', genre2: 'genre2_A', item: 'item_A_A_1', cost: 710},
+            {id:  2, company: 'CompanyA', genre1: 'genre1_A', genre2: 'genre2_A', item: 'item_A_A_1', cost: 850},
+            {id:  3, company: 'CompanyA', genre1: 'genre1_A', genre2: 'genre2_A', item: 'item_A_A_2', cost: 410},
+            {id:  4, company: 'CompanyA', genre1: 'genre1_A', genre2: 'genre2_A', item: 'item_A_A_3', cost: 570},
+            {id:  5, company: 'CompanyA', genre1: 'genre1_A', genre2: 'genre2_A', item: 'item_A_A_3', cost: 230},
+            {id:  6, company: 'CompanyA', genre1: 'genre1_A', genre2: 'genre2_B', item: 'item_A_B_1', cost: 460},
+            {id:  7, company: 'CompanyA', genre1: 'genre1_A', genre2: 'genre2_B', item: 'item_A_B_2', cost: 530},
+            {id:  8, company: 'CompanyA', genre1: 'genre1_B', genre2: 'genre2_A', item: 'item_B_A_1', cost: 50},
+            {id:  9, company: 'CompanyA', genre1: 'genre1_B', genre2: 'genre2_A', item: 'item_B_A_2', cost: 150},
+            {id: 10, company: 'CompanyA', genre1: 'genre1_B', genre2: 'genre2_A', item: 'item_B_A_2', cost: 330},
+            {id: 11, company: 'CompanyA', genre1: 'genre1_B', genre2: 'genre2_B', item: 'item_B_B_1', cost: 120},
+            {id: 12, company: 'CompanyA', genre1: 'genre1_B', genre2: 'genre2_B', item: 'item_B_B_1', cost: 160},
+            {id: 13, company: 'CompanyA', genre1: 'genre1_B', genre2: 'genre2_B', item: 'item_B_B_2', cost: 140},
+            {id: 14, company: 'CompanyA', genre1: 'genre1_C', genre2: 'genre2_A', item: 'item_C_A_1', cost: 30},
+            {id: 15, company: 'CompanyA', genre1: 'genre1_C', genre2: 'genre2_A', item: 'item_C_A_1', cost: 120},
+            {id: 16, company: 'CompanyA', genre1: 'genre1_C', genre2: 'genre2_A', item: 'item_C_A_2', cost: 50},
+            {id: 17, company: 'CompanyB', genre1: 'genre1_A', genre2: 'genre2_A', item: 'item_A_A_1', cost: 100},
+            {id: 18, company: 'CompanyB', genre1: 'genre1_A', genre2: 'genre2_A', item: 'item_A_A_1', cost: 250},
+            {id: 19, company: 'CompanyB', genre1: 'genre1_A', genre2: 'genre2_A', item: 'item_A_A_1', cost: 130},
+            {id: 20, company: 'CompanyB', genre1: 'genre1_A', genre2: 'genre2_A', item: 'item_A_A_3', cost: 170},
+            {id: 21, company: 'CompanyB', genre1: 'genre1_A', genre2: 'genre2_A', item: 'item_A_A_3', cost: 200},
+            {id: 22, company: 'CompanyB', genre1: 'genre1_A', genre2: 'genre2_B', item: 'item_A_B_1', cost: 100},
+            {id: 23, company: 'CompanyB', genre1: 'genre1_A', genre2: 'genre2_B', item: 'item_A_B_2', cost: 210},
+            {id: 24, company: 'CompanyB', genre1: 'genre1_B', genre2: 'genre2_A', item: 'item_B_A_1', cost: 50},
+            {id: 25, company: 'CompanyB', genre1: 'genre1_B', genre2: 'genre2_A', item: 'item_B_A_2', cost: 210},
+            {id: 26, company: 'CompanyB', genre1: 'genre1_B', genre2: 'genre2_B', item: 'item_B_B_1', cost: 120},
+            {id: 27, company: 'CompanyB', genre1: 'genre1_B', genre2: 'genre2_B', item: 'item_B_B_1', cost: 30},
+            {id: 28, company: 'CompanyB', genre1: 'genre1_B', genre2: 'genre2_B', item: 'item_B_B_2', cost: 230},
+            {id: 29, company: 'CompanyB', genre1: 'genre1_B', genre2: 'genre2_B', item: 'item_B_B_3', cost: 110},
+            {id: 30, company: 'CompanyB', genre1: 'genre1_C', genre2: 'genre2_A', item: 'item_C_A_1', cost: 190},
+            {id: 31, company: 'CompanyB', genre1: 'genre1_C', genre2: 'genre2_A', item: 'item_C_A_2', cost: 70},
+            {id: 32, company: 'CompanyC', genre1: 'genre1_A', genre2: 'genre2_A', item: 'item_A_A_1', cost: 110},
+            {id: 33, company: 'CompanyC', genre1: 'genre1_A', genre2: 'genre2_A', item: 'item_A_A_1', cost: 20},
+            {id: 34, company: 'CompanyC', genre1: 'genre1_A', genre2: 'genre2_A', item: 'item_A_A_2', cost: 240},
+            {id: 35, company: 'CompanyC', genre1: 'genre1_A', genre2: 'genre2_B', item: 'item_A_B_1', cost: 60},
+            {id: 36, company: 'CompanyC', genre1: 'genre1_A', genre2: 'genre2_B', item: 'item_A_B_2', cost: 130},
+            {id: 37, company: 'CompanyC', genre1: 'genre1_A', genre2: 'genre2_B', item: 'item_A_B_3', cost: 130},
+            {id: 38, company: 'CompanyC', genre1: 'genre1_B', genre2: 'genre2_A', item: 'item_B_A_1', cost: 90},
+            {id: 39, company: 'CompanyC', genre1: 'genre1_B', genre2: 'genre2_A', item: 'item_B_A_2', cost: 110},
+            {id: 40, company: 'CompanyC', genre1: 'genre1_B', genre2: 'genre2_A', item: 'item_B_A_2', cost: 70},
+            {id: 41, company: 'CompanyC', genre1: 'genre1_B', genre2: 'genre2_B', item: 'item_B_B_1', cost: 80},
+            {id: 42, company: 'CompanyC', genre1: 'genre1_B', genre2: 'genre2_B', item: 'item_B_B_2', cost: 70},
+            {id: 43, company: 'CompanyC', genre1: 'genre1_C', genre2: 'genre2_A', item: 'item_C_A_1', cost: 140},
+            {id: 44, company: 'CompanyC', genre1: 'genre1_C', genre2: 'genre2_A', item: 'item_C_A_1', cost: 230},
+            {id: 45, company: 'CompanyC', genre1: 'genre1_C', genre2: 'genre2_A', item: 'item_C_A_2', cost: 20},
+            {id: 46, company: 'CompanyC', genre1: 'genre1_C', genre2: 'genre2_A', item: 'item_C_A_3', cost: 20},
+            {id: 47, company: 'CompanyC', genre1: 'genre1_C', genre2: 'genre2_B', item: 'item_C_B_1', cost: 30},
+        ];
+
+        const result1 = alasql("SELECT company as group_key, SUM(cost) AS amount FROM ? GROUP BY company", [data]);
+        console.log(result1);
+
+        const result2 = alasql("SELECT genre1 as group_key, SUM(cost) AS amount FROM ? WHERE company = 'CompanyA' GROUP BY genre1", [data]);
+        console.log(result2);
+
+        const result3 = alasql("SELECT genre2 as group_key, SUM(cost) AS amount FROM ? WHERE company = 'CompanyA' AND genre1 = 'genre1_A' GROUP BY genre2", [data]);
+        console.log(result3);
+
+        const result4 = alasql("SELECT item as group_key, SUM(cost) AS amount FROM ? WHERE company = 'CompanyA' AND genre1 = 'genre1_A' AND genre2 = 'genre2_A' GROUP BY item", [data]);
+        console.log(result4);
+
+        draw_graph(result1, 'chart1');
+        draw_graph(result2, 'chart2');
+        draw_graph(result3, 'chart3');
+        draw_graph(result4, 'chart4');
+
+
+        function draw_graph(result, element_id){
+
+            const data = format_result(result);
+            console.log(data);
+
+            const chart = echarts.init(document.getElementById(element_id));
+            const option = {
+                dataset:{
+                    source: data
+                },
+                xAxis: {type: 'value'},
+                yAxis: {type: 'category'},
+                series: [
+                    {
+                        type: 'bar',
+                        encode: {
+                            x: 'amount',
+                            y: 'group_key'
+                        }
+                    }
+                ]
+            };
+            chart.setOption(option);
+        }
+
+        function format_result(result){
+            let data = [['group_key', 'amount']];
+            for(let i = 0; i < result.length; i++){
+                data.push([result[i].group_key, result[i].amount]);
+            }
+            return data;
+        }
+
+    </script>
+</body>
+</html>
