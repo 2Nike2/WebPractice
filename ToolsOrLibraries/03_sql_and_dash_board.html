@@ -16,28 +16,65 @@
 
     <style>
         .chart{
+            position: absolute;
             width: 480px;
             height: 320px;
+            border: 1px solid;
         }
 
     </style>
 
     <script>
 
+        // interact(".chart").draggable({
+        //     onstart(e){
+        //         if(!e.target.posX) e.target.posX = 0;
+        //         if(!e.target.posY) e.target.posY = 0;
+        //         e.target.style.backgroundColor = "royalblue";
+        //     },
+        //     onmove(e){
+        //         e.target.posX += e.dx;
+        //         e.target.posY += e.dy;
+        //         e.target.style.transform = 
+        //             `translate(${e.target.posX}px, ${e.target.posY}px)`;
+        //     },
+        //     onend(e){
+        //         e.target.style.backgroundColor = "";
+        //     }
+        // });
         interact(".chart").draggable({
-            onstart(e){
-                if(!e.target.posX) e.target.posX = 0;
-                if(!e.target.posY) e.target.posY = 0;
-                e.target.style.backgroundColor = "royalblue";
-            },
-            onmove(e){
-                e.target.posX += e.dx;
-                e.target.posY += e.dy;
-                e.target.style.transform = 
-                    `translate(${e.target.posX}px, ${e.target.posY}px)`;
-            },
-            onend(e){
-                e.target.style.backgroundColor = "";
+            listeners: {
+                move(e) {
+                const target = e.target;
+                const x = (parseFloat(target.getAttribute('data-x')) || 0) + e.dx;
+                const y = (parseFloat(target.getAttribute('data-y')) || 0) + e.dy;
+
+                target.style.transform = `translate(${x}px, ${y}px)`;
+
+                target.setAttribute('data-x', x);
+                target.setAttribute('data-y', y);
+                }
+            }
+        })
+        .resizable({
+            edges: { left: true, right: true, bottom: true, top: true },
+            listeners: {
+                move(e) {
+                const target = e.target;
+                let x = (parseFloat(target.getAttribute('data-x')) || 0);
+                let y = (parseFloat(target.getAttribute('data-y')) || 0);
+
+                target.style.width = `${e.rect.width}px`;
+                target.style.height = `${e.rect.height}px`;
+
+                x += e.deltaRect.left;
+                y += e.deltaRect.top;
+
+                target.style.transform = `translate(${x}px, ${y}px)`;
+
+                target.setAttribute('data-x', x);
+                target.setAttribute('data-y', y);
+                }
             }
         });
 
