@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音声認識テスト</title>
+</head>
+<body>
+    <div>
+        <button onclick="startRecording()">録音開始</button>
+        <button onclick="stopRecording()">録音終了</button>
+        <textarea id="result" cols="30" rows="10"></textarea>
+    </div>
+    <script>
+
+        const textarea = document.getElementById('result');
+        const recognition = new webkitSpeechRecognition();
+        recognition.lang = 'ja';
+        recognition.continuous = true;
+        recognition.onresult = ({ results }) => {
+            
+            textarea.value = results[0][0].transcript;
+        };
+
+        function startRecording() {
+            textarea.value = '録音中...';
+            recognition.start();            
+        }
+
+        function stopRecording() {
+            recognition.stop();
+        }
+        
+    </script>
+
+</body>
+</html>
